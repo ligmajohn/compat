@@ -38,9 +38,20 @@ gsub, sub, random, find, lower, gmatch, match = string.gsub, string.sub, math.ra
 insert, remove, cwrap, split, format, upper = table.insert, table.remove, coroutine.wrap, string.split, string.format, string.upper
 clamp, round, heartbeat, renderstepped, stepped = math.clamp, math.round, Services.RunService.Heartbeat, Services.RunService.RenderStepped, Services.RunService.Stepped
 instnew, cfnew, v3new, sort, pack, unpack = Instance.new, CFrame.new, Vector3.new, table.sort, table.pack, table.unpack
-LoadURL = function(url) return loadstring(game:HttpGet(url))() end
-Maid = LoadURL("https://raw.githubusercontent.com/ligmajohn/compat/main/libraries/maid.lua")
-Signal = LoadURL("https://raw.githubusercontent.com/ligmajohn/compat/main/libraries/signal.lua")
+local importCache = {}
+import = function(url)
+	local success, result = pcall(function()
+		local new = gsub(gsub(lower(tostring(url)), "-", ""), " ", "")
+		return game:HttpGet(format("https://raw.githubusercontent.com/ligmajohn/compat/main/libraries/%s.lua", new))
+	end)
+	if success then
+		importCache[url] = loadstring(game:HttpGet(result))()
+		return importCache[url]
+	end
+	return loadstring(game:HttpGet(url))()
+end
+Maid = import("maid")
+Signal = import("signal")
 IsKeyDown = {}
 GetKeyCodeName = function(input) return split(tostring(input), ".")[3] end
 Services.UserInputService.InputBegan:Connect(function(input, processed)
