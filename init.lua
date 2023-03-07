@@ -40,7 +40,7 @@ clamp, round, heartbeat, renderstepped, stepped = math.clamp, math.round, Servic
 instnew, cfnew, v3new, sort, pack, unpack = Instance.new, CFrame.new, Vector3.new, table.sort, table.pack, table.unpack
 import = function(url)
 	local success, result = pcall(function() return game:HttpGet(format("https://raw.githubusercontent.com/ligmajohn/compat/main/libraries/%s.lua", gsub(lower(tostring(url)), " ", "-"))) end)
-	return success and loadstring(game:HttpGet(result))() or loadstring(game:HttpGet(url))()
+	if success then return loadstring(game:HttpGet(result))() else return loadstring(game:HttpGet(url))() end
 end
 Maid = import("maid")
 Signal = import("signal")
