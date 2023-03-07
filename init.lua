@@ -310,7 +310,7 @@ filtergc = filtergc or (getgc and function(Type, Data, One)
     return Results
 end)
 ImportESP = function()
-    local ESP = LoadURL("https://raw.githubusercontent.com/ligmajohn/backups/main/esp/main.lua")
+    local ESP = import("https://raw.githubusercontent.com/ligmajohn/backups/main/esp/main.lua")
     ESP:Toggle(false)
     ESP.Players = false
     ESP.Tracers = false
