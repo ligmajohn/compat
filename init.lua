@@ -77,11 +77,7 @@ GetStringFromKeyCode = function(input)
 end
 filter = function(tbl, func)
     local new = {}
-    for i, v in next, tbl do
-        if func(i, v) then
-            new[#new + 1] = v
-        end
-    end
+    for i, v in next, tbl do if func(i, v) then new[#new + 1] = v end end
     return new
 end
 map = function(tbl, func)
@@ -94,11 +90,7 @@ map = function(tbl, func)
 end
 merge = function(...)
     local new = {}
-    for i, v in next, {...} do
-        for _, v2 in next, v do
-            new[i] = v2
-        end
-    end
+    for i, v in next, {...} do for _, v2 in next, v do new[i] = v2 end end
     return new
 end
 cons = {connections = {}, loaded = true}
