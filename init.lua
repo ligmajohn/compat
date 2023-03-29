@@ -1,6 +1,7 @@
 local firetouched = {}
 local networkownertick = tick()
 local GetService = game.GetService
+local GetDebugId = game.GetDebugId
 local globalenv = (getgenv and getgenv()) or {}
 
 cloneref = globalenv.cloneref or function(...) return ... end
@@ -318,4 +319,8 @@ ImportESP = function()
     ESP.Names = false
     ESP.Color = ESP.Presets.Green
     return ESP
+end
+GetInstanceFromId = function(id)
+    for _, v in next, game:GetDescendants() do if GetDebugId(v) == id then return v end end
+    return nil
 end
