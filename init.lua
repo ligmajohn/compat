@@ -39,6 +39,7 @@ gsub, sub, random, find, lower, gmatch, match = string.gsub, string.sub, math.ra
 insert, remove, cwrap, split, format, upper = table.insert, table.remove, coroutine.wrap, string.split, string.format, string.upper
 clamp, round, heartbeat, renderstepped, stepped = math.clamp, math.round, Services.RunService.Heartbeat, Services.RunService.RenderStepped, Services.RunService.Stepped
 instnew, cfnew, v3new, sort, pack, unpack = Instance.new, CFrame.new, Vector3.new, table.sort, table.pack, table.unpack
+postsimulation = Services.RunService.PostSimulation
 import = function(url)
 	local success, result = pcall(function() return game:HttpGet(format("https://raw.githubusercontent.com/ligmajohn/compat/main/libraries/%s.lua", gsub(lower(tostring(url)), " ", "-"))) end)
 	return success and loadstring(result)() or loadstring(game:HttpGet(url))()
@@ -315,4 +316,14 @@ end
 GetInstanceFromId = function(id)
     for _, v in next, game:GetDescendants() do if GetDebugId(v) == id then return v end end
     return nil
+end
+postwait = function() postsimulation:Wait() end
+benchmark = function(name, func)
+    if typeof(name) == "function" then func = name end
+    if typeof(func) ~= "function" then return end
+    local name = typeof(name) == "string" and name or "Task"
+    local start = os.clock()
+    func()
+    local finish = os.clock()
+    return format("Task \"%s\" took %0.20f seconds to complete", name, finish - start)
 end
