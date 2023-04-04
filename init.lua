@@ -330,6 +330,6 @@ benchmark = function(name, func)
     return format("Task \"%s\" took %0.20f seconds to complete", name, finish - start)
 end
 getmaxupvalue = function(x, t)
-    for _, v in ipairs(t) do x = getupvalue(x, v) end
+    for _, v in next, t do x = getupvalue(x, v) end
     return x
 end
