@@ -22,3 +22,5 @@ function newprint(...)
 end
 
 newprint(getgenv())
+
+return newprint
