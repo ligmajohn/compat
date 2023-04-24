@@ -18,3 +18,7 @@ local merge = function(...)
     for i, v in next, {...} do for _, v2 in next, v do new[i] = v2 end end
     return new
 end
+
+local indexOf = function(tbl, val)
+    for i, v in next, tbl do if v == val then return i end end
+end
