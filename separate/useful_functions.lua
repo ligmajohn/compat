@@ -22,3 +22,18 @@ end
 local indexOf = function(tbl, val)
     for i, v in next, tbl do if v == val then return i end end
 end
+
+local resolvePath = function(parent, ...)
+    local last = parent
+    for _, v in next, {...} do last = last:FindFirstChild(v) or last:WaitForChild(v) end
+    return last
+end
+
+local rng = Random.new()
+local shuffle = function(from)
+	for i = #from, 2, -1 do
+		local j = rng:NextInteger(1, i)
+		from[i], from[j] = from[j], from[i]
+	end
+	return from
+end
