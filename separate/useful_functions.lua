@@ -37,3 +37,7 @@ local shuffle = function(from)
 	end
 	return from
 end
+
+local errorFormat = function(output)
+    return output:match("%d+: (.+)")
+end
