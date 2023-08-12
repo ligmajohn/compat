@@ -23,7 +23,7 @@ local indexOf = function(tbl, val)
     for i, v in next, tbl do if v == val then return i end end
 end
 
-local resolve = function(parent, ...)
+local resolvePath = function(parent, ...)
 	local last = parent
 	for _, v in next, {...} do
 		local i = last:FindFirstChild(v)
