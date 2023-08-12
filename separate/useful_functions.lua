@@ -1,7 +1,7 @@
 local filter = function(tbl, func)
-    local new = {}
-    for i, v in next, tbl do if func(i, v) then new[#new + 1] = v end end
-    return new
+	local new = {}
+	for i, v in next, tbl do if func(i, v) then new[#new + 1] = v end end
+	return new
 end
 
 local map = function(tbl, func)
@@ -23,10 +23,18 @@ local indexOf = function(tbl, val)
     for i, v in next, tbl do if v == val then return i end end
 end
 
-local resolvePath = function(parent, ...)
-    local last = parent
-    for _, v in next, {...} do last = last:FindFirstChild(v) or last:WaitForChild(v) end
-    return last
+local resolve = function(parent, ...)
+	local last = parent
+	for _, v in next, {...} do
+		local i = last:FindFirstChild(v)
+		if i then
+			last = i
+		else
+			last = false
+			break
+		end
+	end
+	return last
 end
 
 local rng = Random.new()
@@ -39,5 +47,5 @@ local shuffle = function(from)
 end
 
 local errorFormat = function(output)
-    return output:match("%d+: (.+)")
+	return output:match("%d+: (.+)")
 end
