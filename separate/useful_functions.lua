@@ -1,9 +1,11 @@
+-- The filter() method creates a new array with all elements that pass the test implemented by the provided function.
 local filter = function(tbl, func)
 	local new = {}
 	for i, v in next, tbl do if func(i, v) then new[#new + 1] = v end end
 	return new
 end
 
+-- The map() method creates a new array populated with the results of calling a provided function on every element in the calling array.
 local map = function(tbl, func)
     local new = {}
     for i, v in next, tbl do
@@ -46,6 +48,11 @@ local shuffle = function(from)
 	return from
 end
 
+--[[
+	"Error:2: attempt to perform arithmetic (add) on nil and number"
+	-->
+	"attempt to perform arithmetic (add) on nil and number"
+]]
 local errorFormat = function(output)
 	return output:match("%d+: (.+)")
 end
